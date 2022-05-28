@@ -1,12 +1,12 @@
 {
-  "name": "react-big-scheduler",
-  "version": "0.2.7",
+  "name": "react-resource-scheduler",
+  "version": "0.2.22",
   "description": "A scheduler and resource planning component built for React and made for modern browsers (IE10+)",
   "keywords": [
-    "scheduler",
+    "resource-scheduler",
     "react-component",
     "react",
-    "react-big-scheduler",
+    "react-resource-scheduler",
     "resource planning",
     "antd"
   ],
@@ -17,14 +17,12 @@
     "CHANGELOG.md"
   ],
   "main": "lib/index",
-  "homepage": "https://github.com/StephenChou1017/react-big-scheduler",
-  "author": "Stephen Chou <27788280@qq.com> (https://github.com/StephenChou1017)",
   "repository": {
     "type": "git",
-    "url": "git@github.com:StephenChou1017/react-big-scheduler.git"
+    "url": "git@github.com:AdrianArnautu/react-resource-scheduler.git"
   },
   "bugs": {
-    "url": "http://github.com/StephenChou1017/react-big-scheduler/issues"
+    "url": "http://github.com/AdrianArnautu/react-resource-scheduler/issues"
   },
   "license": "MIT",
   "config": {},
@@ -33,7 +31,7 @@
     "build": "node scripts/build.js",
     "clean:exampledist": "rimraf ./exampledist/static",
     "build:exampledist": "npm run clean:exampledist && cpy src/css/style.css exampledist/static && cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.js",
-    "example": "webpack-dev-server --config ./webpack/webpack-dev.config.js --hot",
+    "example": "webpack-dev-server --config ./webpack/webpack-dev.config.js --hot --host 0.0.0.0",
     "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build",
     "build:dll": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.dll.config.js"
   },
@@ -41,8 +39,8 @@
     "lint"
   ],
   "dependencies": {
-    "antd": "^3.16.6",
-    "cpy": "^3.4.1",
+    "antd": "3.16.6",
+    "cpy": "3.4.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -52,7 +50,6 @@
     "rrule": "^2.6.0"
   },
   "devDependencies": {
-    "babel": "6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",

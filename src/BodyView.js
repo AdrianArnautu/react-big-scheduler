@@ -32,7 +32,7 @@ class BodyView extends Component {
                         style = {...style, backgroundColor: cellBgColor};
                 }
                 return (
-                    <td key={key} style={style}><div></div></td>
+                    <td className={header.isEndOfHour ? 'hour-boundary' : ''} key={key} style={style}><div></div></td>
                 )
             });
 

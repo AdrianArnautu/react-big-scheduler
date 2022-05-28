@@ -597,7 +597,7 @@ export default class SchedulerData {
             header = start;
 
         if(this.showAgenda){
-            headers.push({time: header.format(DATETIME_FORMAT), nonWorkingTime: false});
+            headers.push({time: header.format(DATETIME_FORMAT), isEndOfHour: header.format('mm') === '45', nonWorkingTime: false});
         }
         else {
             if (this.cellUnit === CellUnits.Hour) {
@@ -612,7 +612,7 @@ export default class SchedulerData {
                         if(hour >= this.config.dayStartFrom && hour <= this.config.dayStopTo) {
                             let time = header.format(DATETIME_FORMAT);
                             let nonWorkingTime = this.behaviors.isNonWorkingTimeFunc(this, time);
-                            headers.push({ time: time, nonWorkingTime: nonWorkingTime });
+                            headers.push({ time: time, isEndOfHour: header.format('mm') === '45', nonWorkingTime: nonWorkingTime });
                         }
     
                         header = header.add(this.config.minuteStep, 'minutes');
