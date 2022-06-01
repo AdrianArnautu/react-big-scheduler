@@ -68,13 +68,17 @@ export default {
     nonAgendaDayCellHeaderFormat: 'ha',
     nonAgendaOtherCellHeaderFormat: 'ddd M/D',
 
+    searchViewDateName: 'Date',
+    searchViewItemName: 'Item',
+
     minuteStep: 30,
 
     views: [
-        {viewName: 'Day', viewType: ViewTypes.Day, showAgenda: false, isEventPerspective: false},
-        {viewName: 'Week', viewType: ViewTypes.Week, showAgenda: false, isEventPerspective: false},
-        {viewName: 'Month', viewType: ViewTypes.Month, showAgenda: false, isEventPerspective: false},
-        {viewName: 'Quarter', viewType: ViewTypes.Quarter, showAgenda: false, isEventPerspective: false},
-        {viewName: 'Year', viewType: ViewTypes.Year, showAgenda: false, isEventPerspective: false},
+        {viewName: 'Day', viewType: ViewTypes.Day, showAgenda: false, showSearchEvents: false, isEventPerspective: false},
+        {viewName: 'Week', viewType: ViewTypes.Week, showAgenda: false, showSearchEvents: false, isEventPerspective: false},
+        {viewName: 'Month', viewType: ViewTypes.Month, showAgenda: false, showSearchEvents: false, isEventPerspective: false},
+        {viewName: 'Quarter', viewType: ViewTypes.Quarter, showAgenda: false, showSearchEvents: false, isEventPerspective: false},
+        {viewName: 'Year', viewType: ViewTypes.Year, showAgenda: false, showSearchEvents: false, isEventPerspective: false},
+        {viewName: 'Search', viewType: ViewTypes.Search, showAgenda: false, showSearchEvents: true, isEventPerspective: false},
     ],
 }

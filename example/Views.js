@@ -9,14 +9,15 @@ class Basic extends Component{
     constructor(props){
         super(props);
 
-        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Month, false, false, {
+        let schedulerData = new SchedulerData('2017-12-18', ViewTypes.Search, false, false, {
             eventItemPopoverEnabled: false,
             views: [
                 {viewName: 'Agenda View', viewType: ViewTypes.Month, showAgenda: true, isEventPerspective: false},
+                {viewName: 'Search View', viewType: ViewTypes.Search, showAgenda: false, showSearchEvents: true, isEventPerspective: false},
                 {viewName: 'Resource View', viewType: ViewTypes.Month, showAgenda: false, isEventPerspective: false},
                 {viewName: 'Task View', viewType: ViewTypes.Month, showAgenda: false, isEventPerspective: true},
             ]
-        });
+        }, undefined, undefined, true);
         schedulerData.localeMoment.locale('en');
         schedulerData.setResources(DemoData.resources);
         schedulerData.setEvents(DemoData.eventsForTaskView);
@@ -31,7 +32,7 @@ class Basic extends Component{
             <div>
                 <Nav />
                 <div>
-                    <h3 style={{textAlign: 'center'}}>3 View Types (take month for example)<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/Views.js" /></h3>
+                    <h3 style={{textAlign: 'center'}}>3 View Types (take month for example )<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/Views.js" /></h3>
                     <Scheduler schedulerData={viewModel}
                                prevClick={this.prevClick}
                                nextClick={this.nextClick}
@@ -71,7 +72,7 @@ class Basic extends Component{
     }
 
     onViewChange = (schedulerData, view) => {
-        schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
+        schedulerData.setViewType(view.viewType, view.showAgenda, view.showSearchEvents, view.isEventPerspective);
         schedulerData.config.creatable = !view.isEventPerspective;
         schedulerData.setEvents(DemoData.eventsForTaskView);
         this.setState({

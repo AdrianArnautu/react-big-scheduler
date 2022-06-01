@@ -43,6 +43,7 @@ import HeaderView from './HeaderView'
 import BodyView from './BodyView'
 import ResourceEvents from './ResourceEvents'
 import AgendaView from './AgendaView'
+import SearchView from './SearchView'
 import AddMorePopover from './AddMorePopover'
 import ViewTypes from './ViewTypes'
 import CellUnits from './CellUnits'
@@ -160,23 +161,26 @@ class Scheduler extends Component {
 
     render() {
         const { schedulerData, leftCustomHeader, rightCustomHeader } = this.props;
-        const { renderData, viewType, showAgenda, isEventPerspective, config } = schedulerData;
+        const { renderData, viewType, showAgenda, showSearchEvents, isEventPerspective, config } = schedulerData;
         const width = schedulerData.getSchedulerWidth();
         const calendarPopoverEnabled = config.calendarPopoverEnabled;
 
         let dateLabel = schedulerData.getDateLabel();
-        let defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}`;
+        let defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}${showSearchEvents ? 1 : 0}`;
         let radioButtonList = config.views.map(item => {
-            return <RadioButton key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
-                                value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}><span
+            return <RadioButton key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}${item.showSearchEvents ? 1 : 0}`}
+                                value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}${item.showSearchEvents ? 1 : 0}`}><span
                 style={{margin: "0px 8px"}}>{item.viewName}</span></RadioButton>
         })
 
         let tbodyContent = <tr />;
-        if (showAgenda) {
-            tbodyContent = <AgendaView
-                                {...this.props}
-                            />
+        if (showAgenda || showSearchEvents) {
+            if (showAgenda) {
+                tbodyContent = <AgendaView {...this.props} />
+            }
+            if (showSearchEvents) {
+                tbodyContent = <SearchView {...this.props} />
+            }
         }
         else {
             let resourceTableWidth = schedulerData.getResourceTableWidth();
@@ -277,10 +281,7 @@ class Scheduler extends Component {
         let popover = <div className="popover-calendar"><Calendar fullscreen={false} onSelect={this.onSelect}/></div>;
         let schedulerHeader = <div />;
         if(config.headerEnabled) {
-            schedulerHeader = (
-                <Row type="flex" align="middle" justify="space-between" style={{marginBottom: '24px'}}>
-                    {leftCustomHeader}
-                    <Col>
+            const changeDateHeader = viewType != ViewTypes.Search ?
                         <div className='header2-text'>
                             <Icon type="left" style={{marginRight: "8px"}} className="icon-nav"
                                     onClick={this.goBack}/>
@@ -296,8 +297,13 @@ class Scheduler extends Component {
                             }
                             <Icon type="right" style={{marginLeft: "8px"}} className="icon-nav"
                                     onClick={this.goNext}/>
-                        </div>
-                    </Col>
+                        </div> : ''
+
+
+            schedulerHeader = (
+                <Row type="flex" align="middle" justify="space-between" style={{marginBottom: '24px'}}>
+                    {leftCustomHeader}
+                    <Col>{changeDateHeader}</Col>
                     <Col>
                         <RadioGroup defaultValue={defaultValue} size="default" onChange={this.onViewChange}>
                             {radioButtonList}
@@ -455,7 +461,8 @@ class Scheduler extends Component {
         let viewType = parseInt(e.target.value.charAt(0));
         let showAgenda = e.target.value.charAt(1) === '1';
         let isEventPerspective = e.target.value.charAt(2) === '1';
-        onViewChange(schedulerData, {viewType: viewType, showAgenda: showAgenda, isEventPerspective: isEventPerspective});
+        let showSearchEvents = e.target.value.charAt(3) === '1';
+        onViewChange(schedulerData, {viewType: viewType, showAgenda: showAgenda, showSearchEvents: showSearchEvents, isEventPerspective: isEventPerspective});
     }
 
     goNext = () => {

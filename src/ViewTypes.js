@@ -6,7 +6,8 @@ const ViewTypes = {
     Year: 4,
     Custom: 5,
     Custom1: 6,
-    Custom2: 7
+    Custom2: 7,
+    Search: 8
 };
 
 export default ViewTypes

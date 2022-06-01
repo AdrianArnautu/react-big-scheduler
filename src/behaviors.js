@@ -51,7 +51,7 @@ export const getDateLabel = (schedulerData, viewType, startDate, endDate) => {
     let dateLabel = start.format('MMM D, YYYY');
 
     if(viewType === ViewTypes.Week || (start != end && (
-        viewType === ViewTypes.Custom || viewType === ViewTypes.Custom1 || viewType === ViewTypes.Custom2
+        viewType === ViewTypes.Custom || viewType === ViewTypes.Custom1 || viewType === ViewTypes.Custom2 || viewType === ViewTypes.Search
     ))) {
         dateLabel = `${start.format('MMM D')}-${end.format('D, YYYY')}`;
         if(start.month() !== end.month())
@@ -107,6 +107,13 @@ export const isNonWorkingTime = (schedulerData, time) => {
     return false;
 }
 
+export const searchViewItemDate = (schedulerData, eventItem, localeMoment, DATETIME_FORMAT) => {
+    const eventStart = localeMoment(eventItem.start);
+    const eventEnd = localeMoment(eventItem.end);
+
+    return eventStart.format(DATETIME_FORMAT) + " - " + eventEnd.format(DATETIME_FORMAT)
+}
+
 export default {
     //getSummaryFunc: getSummary,
     getSummaryFunc: undefined,
@@ -118,4 +125,5 @@ export default {
     getDateLabelFunc: getDateLabel,
     getEventTextFunc: getEventText,
     isNonWorkingTimeFunc: isNonWorkingTime,
+    searchViewItemDate: searchViewItemDate,
 }
