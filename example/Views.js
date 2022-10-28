@@ -13,7 +13,7 @@ class Basic extends Component{
             eventItemPopoverEnabled: false,
             views: [
                 {viewName: 'Agenda View', viewType: ViewTypes.Month, showAgenda: true, isEventPerspective: false},
-                {viewName: 'Search View', viewType: ViewTypes.Search, showAgenda: false, showSearchEvents: true, isEventPerspective: false},
+                {viewName: 'Search View', viewType: ViewTypes.Search, showAgenda: false, isEventPerspective: false},
                 {viewName: 'Resource View', viewType: ViewTypes.Month, showAgenda: false, isEventPerspective: false},
                 {viewName: 'Task View', viewType: ViewTypes.Month, showAgenda: false, isEventPerspective: true},
             ]
@@ -72,7 +72,7 @@ class Basic extends Component{
     }
 
     onViewChange = (schedulerData, view) => {
-        schedulerData.setViewType(view.viewType, view.showAgenda, view.showSearchEvents, view.isEventPerspective);
+        schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
         schedulerData.config.creatable = !view.isEventPerspective;
         schedulerData.setEvents(DemoData.eventsForTaskView);
         this.setState({

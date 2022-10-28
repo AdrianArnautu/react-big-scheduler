@@ -44,7 +44,7 @@ class SearchEventItem extends Component {
 
         let eventItemTemplate = (
             <div className={roundCls + ' event-item'} key={eventItem.id}
-                 style={{height: config.eventItemHeight, maxWidth: config.agendaMaxEventWidth, backgroundColor: bgColor}}>
+                 style={{height: config.eventItemHeight, backgroundColor: bgColor}}>
                 <span style={{marginLeft: '10px', lineHeight: `${config.eventItemHeight}px` }}>{titleText}</span>
             </div>
         );

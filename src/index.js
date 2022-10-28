@@ -161,24 +161,24 @@ class Scheduler extends Component {
 
     render() {
         const { schedulerData, leftCustomHeader, rightCustomHeader } = this.props;
-        const { renderData, viewType, showAgenda, showSearchEvents, isEventPerspective, config } = schedulerData;
+        const { renderData, viewType, showAgenda, isEventPerspective, config } = schedulerData;
         const width = schedulerData.getSchedulerWidth();
         const calendarPopoverEnabled = config.calendarPopoverEnabled;
 
         let dateLabel = schedulerData.getDateLabel();
-        let defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}${showSearchEvents ? 1 : 0}`;
+        let defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}`;
         let radioButtonList = config.views.map(item => {
-            return <RadioButton key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}${item.showSearchEvents ? 1 : 0}`}
-                                value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}${item.showSearchEvents ? 1 : 0}`}><span
+            return <RadioButton key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
+                                value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}><span
                 style={{margin: "0px 8px"}}>{item.viewName}</span></RadioButton>
         })
 
         let tbodyContent = <tr />;
-        if (showAgenda || showSearchEvents) {
+        if (showAgenda || viewType === ViewTypes.Search) {
             if (showAgenda) {
                 tbodyContent = <AgendaView {...this.props} />
             }
-            if (showSearchEvents) {
+            if (viewType === ViewTypes.Search) {
                 tbodyContent = <SearchView {...this.props} />
             }
         }
@@ -297,7 +297,14 @@ class Scheduler extends Component {
                             }
                             <Icon type="right" style={{marginLeft: "8px"}} className="icon-nav"
                                     onClick={this.goNext}/>
-                        </div> : ''
+                        </div> :
+                        <div className='header2-text'>
+                            <Icon type="left" style={{marginRight: "8px"}} className="icon-nav"
+                                    onClick={this.goBack}/>
+                            <Icon type="right" style={{marginLeft: "8px"}} className="icon-nav"
+                                    onClick={this.goNext}/>
+                        </div>
+
 
 
             schedulerHeader = (
@@ -461,8 +468,7 @@ class Scheduler extends Component {
         let viewType = parseInt(e.target.value.charAt(0));
         let showAgenda = e.target.value.charAt(1) === '1';
         let isEventPerspective = e.target.value.charAt(2) === '1';
-        let showSearchEvents = e.target.value.charAt(3) === '1';
-        onViewChange(schedulerData, {viewType: viewType, showAgenda: showAgenda, showSearchEvents: showSearchEvents, isEventPerspective: isEventPerspective});
+        onViewChange(schedulerData, {viewType: viewType, showAgenda: showAgenda, isEventPerspective: isEventPerspective});
     }
 
     goNext = () => {

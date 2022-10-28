@@ -8,7 +8,7 @@ export default class SchedulerData {
     constructor(date=moment().format(DATE_FORMAT), viewType = ViewTypes.Week,
                 showAgenda = false, isEventPerspective = false,
                 newConfig = undefined, newBehaviors = undefined,
-                localeMoment = undefined, showSearchEvents = false) {        
+                localeMoment = undefined) {        
         this.resources = [];
         this.events = [];
         this.eventGroups = [];
@@ -16,7 +16,6 @@ export default class SchedulerData {
         this.viewType = viewType;
         this.cellUnit = viewType === ViewTypes.Day ? CellUnits.Hour : CellUnits.Day;
         this.showAgenda = showAgenda;
-        this.showSearchEvents = showSearchEvents;
         this.isEventPerspective = isEventPerspective;
         this.resizing = false;
         this.scrollToSpecialMoment = false;
@@ -152,9 +151,8 @@ export default class SchedulerData {
         this._createRenderData();
     }
 
-    setViewType(viewType = ViewTypes.Week, showAgenda = false, showSearchEvents=false, isEventPerspective = false) {
+    setViewType(viewType = ViewTypes.Week, showAgenda = false, isEventPerspective = false) {
         this.showAgenda = showAgenda;
-        this.showSearchEvents = showSearchEvents;
         this.isEventPerspective = isEventPerspective;
         this.cellUnit = CellUnits.Day;
 
@@ -435,7 +433,6 @@ export default class SchedulerData {
 
     getResourceTableConfigWidth() {
         if(this.showAgenda) return this.config.agendaResourceTableWidth;
-        if(this.showSearchEvents) return this.config.agendaResourceTableWidth; // TODO
 
         return this.viewType === ViewTypes.Week ? this.config.weekResourceTableWidth : (
             this.viewType === ViewTypes.Day ? this.config.dayResourceTableWidth : (
@@ -603,7 +600,7 @@ export default class SchedulerData {
             end = this.localeMoment(this.endDate),
             header = start;
 
-        if (this.showAgenda || this.showSearchEvents){
+        if (this.showAgenda || this.viewType === ViewTypes.Search){
             headers.push({time: header.format(DATETIME_FORMAT), isEndOfHour: header.format('mm') === '45', nonWorkingTime: false});
         }
         else {
@@ -647,7 +644,7 @@ export default class SchedulerData {
     _createInitHeaderEvents(header) {
         let start = this.localeMoment(header.time),
             startValue = start.format(DATETIME_FORMAT);
-        let endValue = this.showAgenda || this.showSearchEvents ? (this.viewType === ViewTypes.Week ? start.add(1, 'weeks').format(DATETIME_FORMAT) : (
+        let endValue = this.showAgenda ? (this.viewType === ViewTypes.Week ? start.add(1, 'weeks').format(DATETIME_FORMAT) : (
             this.viewType === ViewTypes.Day ? start.add(1, 'days').format(DATETIME_FORMAT) : (
                 this.viewType === ViewTypes.Month ? start.add(1, 'months').format(DATETIME_FORMAT) : (
                     this.viewType === ViewTypes.Year ? start.add(1, 'years').format(DATETIME_FORMAT) : (
@@ -792,7 +789,7 @@ export default class SchedulerData {
     }
 
     _getSpan(startTime, endTime, headers){
-        if (this.showAgenda || this.showSearchEvents) return 1;
+        if (this.showAgenda || this.viewType === ViewTypes.Search) return 1;
 
         let start = this.localeMoment(startTime),
             end = this.localeMoment(endTime),
