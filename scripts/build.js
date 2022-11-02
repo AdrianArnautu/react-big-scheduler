@@ -33,7 +33,6 @@ async function build() {
     hackFileName + '.css'
   );
 
-  try {
     // clean
     process.stdout.write('Cleaning...' + sourceDir + ' \n');
     const env = {
@@ -51,7 +50,7 @@ async function build() {
     process.stdout.write('Copying library style definitions... \n');
     process.stdout.write(`cpy ${sourceDir}/css/style.css ${cssTarget} \n`);
     const cssResult = await exec(
-       `cpy ${sourceDir}/css/style.css ${cssTarget}`,
+       `cpy ${sourceDir}/css/style.css ${cssTarget}/`,
        { env }
     );
 
@@ -77,10 +76,6 @@ async function build() {
     );
 
     process.stdout.write('Success! \n');
-  } catch (e) {
-    process.stderr.write(e)
-    process.exit()
-  }
 }
 
 build();
