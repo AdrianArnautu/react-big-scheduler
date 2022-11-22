@@ -84,7 +84,7 @@ class Scheduler extends Component {
             documentHeight: document.documentElement.clientHeight,
         };
 
-        if(schedulerData.isSchedulerResponsive())
+        if (schedulerData.isSchedulerResponsive())
             window.onresize = this.onWindowResize;
     }
 
@@ -139,16 +139,16 @@ class Scheduler extends Component {
 
         const { schedulerData } = this.props;
         const { localeMoment, behaviors } = schedulerData;
-        if(schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc){
-            if(!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth){
+        if (schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc) {
+            if (!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth) {
                 let start = localeMoment(schedulerData.startDate).startOf('day'),
                     end = localeMoment(schedulerData.endDate).endOf('day'),
                     specialMoment = behaviors.getScrollSpecialMomentFunc(schedulerData, start, end);
-                if(specialMoment>= start && specialMoment <= end){
+                if (specialMoment>= start && specialMoment <= end) {
                     let index = 0;
                     schedulerData.headers.forEach((item) => {
                         let header = localeMoment(item.time);
-                        if(specialMoment >= header)
+                        if (specialMoment >= header)
                             index ++;
                     })
                     this.schedulerContent.scrollLeft = (index - 1) * schedulerData.getContentCellWidth();
@@ -206,8 +206,18 @@ class Scheduler extends Component {
                 contentHeight = this.state.contentHeight;
             let resourcePaddingBottom = resourceScrollbarHeight === 0 ? contentScrollbarHeight : 0;
             let contentPaddingBottom = contentScrollbarHeight === 0 ? resourceScrollbarHeight : 0;
-            let schedulerContentStyle = {overflow: 'auto', margin: "0px", position: "relative", paddingBottom: contentPaddingBottom};
-            let resourceContentStyle = {overflowX: "auto", overflowY: "auto", width: resourceTableWidth + resourceScrollbarWidth - 2, margin: `0px -${contentScrollbarWidth}px 0px 0px`};
+            let schedulerContentStyle = {
+                overflow: 'auto', 
+                margin: "0px", 
+                position: "relative", 
+                paddingBottom: contentPaddingBottom
+            };
+            let resourceContentStyle = {
+                overflowX: "auto", 
+                overflowY: "auto", 
+                width: resourceTableWidth + resourceScrollbarWidth - 2, 
+                margin: `0px -${contentScrollbarWidth}px 0px 0px`
+            };
             if (config.schedulerMaxHeight > 0) {
                 schedulerContentStyle = {
                     ...schedulerContentStyle,
@@ -238,7 +248,7 @@ class Scheduler extends Component {
                                 </div>
                             </div>
                             <div style={resourceContentStyle} ref={this.schedulerResourceRef} onMouseOver={this.onSchedulerResourceMouseOver} onMouseOut={this.onSchedulerResourceMouseOut} onScroll={this.onSchedulerResourceScroll}>
-                                <ResourceView
+                                <ResourceView 
                                     {...this.props}
                                     contentScrollbarHeight={resourcePaddingBottom}
                                 />
@@ -316,14 +326,14 @@ class Scheduler extends Component {
         return (
             <table id="RBS-Scheduler-root" className="scheduler" style={{width: `${width}px`}}>
                 <thead>
-                <tr>
-                    <td colSpan="2">
-                        {schedulerHeader}
-                    </td>
-                </tr>
+                    <tr>
+                        <td colSpan="2">
+                            {schedulerHeader}
+                        </td>
+                    </tr>
                 </thead>
                 <tbody>
-                {tbodyContent}
+                    {tbodyContent}
                 </tbody>
             </table>
         )
@@ -340,11 +350,11 @@ class Scheduler extends Component {
             contentScrollbarHeight = this.schedulerContent.offsetHeight - this.schedulerContent.clientHeight;
             contentScrollbarWidth = this.schedulerContent.offsetWidth - this.schedulerContent.clientWidth;
         }
-        if(!!this.schedulerResource) {
+        if (!!this.schedulerResource) {
             resourceScrollbarHeight = this.schedulerResource.offsetHeight - this.schedulerResource.clientHeight;
             resourceScrollbarWidth = this.schedulerResource.offsetWidth - this.schedulerResource.clientWidth;
         }
-        if(!!this.schedulerContentBgTable && !!this.schedulerContentBgTable.offsetHeight){
+        if (!!this.schedulerContentBgTable && !!this.schedulerContentBgTable.offsetHeight) {
             contentHeight = this.schedulerContentBgTable.offsetHeight;
         }
 
@@ -358,7 +368,7 @@ class Scheduler extends Component {
             tmpState = {...tmpState, contentScrollbarWidth: contentScrollbarWidth};
             needSet = true;
         }
-        if(contentHeight != this.state.contentHeight){
+        if (contentHeight != this.state.contentHeight) {
             tmpState = {...tmpState, contentHeight: contentHeight};
             needSet = true;
         }
@@ -387,7 +397,7 @@ class Scheduler extends Component {
     }
 
     onSchedulerHeadScroll = (proxy, event) => {
-         if((this.currentArea === 2 || this.currentArea === -1) && this.schedulerContent.scrollLeft != this.schedulerHead.scrollLeft)
+         if ((this.currentArea === 2 || this.currentArea === -1) && this.schedulerContent.scrollLeft != this.schedulerHead.scrollLeft)
              this.schedulerContent.scrollLeft = this.schedulerHead.scrollLeft;
     }
 
@@ -404,7 +414,7 @@ class Scheduler extends Component {
     }
 
     onSchedulerResourceScroll = (proxy, event) => {
-         if((this.currentArea === 1 || this.currentArea === -1) && this.schedulerContent.scrollTop != this.schedulerResource.scrollTop)
+         if ((this.currentArea === 1 || this.currentArea === -1) && this.schedulerContent.scrollTop != this.schedulerResource.scrollTop)
              this.schedulerContent.scrollTop = this.schedulerResource.scrollTop;
     }
 
@@ -425,7 +435,7 @@ class Scheduler extends Component {
     }
 
     onSchedulerContentScroll = (proxy, event) => {
-        if(this.currentArea === 0 || this.currentArea === -1) {
+        if (this.currentArea === 0 || this.currentArea === -1) {
             if (this.schedulerHead.scrollLeft != this.schedulerContent.scrollLeft)
                 this.schedulerHead.scrollLeft = this.schedulerContent.scrollLeft;
             if (this.schedulerResource.scrollTop != this.schedulerContent.scrollTop)
@@ -434,21 +444,22 @@ class Scheduler extends Component {
 
         const {schedulerData, onScrollLeft, onScrollRight, onScrollTop, onScrollBottom } = this.props;
         const {scrollLeft, scrollTop} = this.state;
-        if(this.schedulerContent.scrollLeft !== scrollLeft) {
-            if(this.schedulerContent.scrollLeft === 0 && onScrollLeft != undefined) {
+        if (this.schedulerContent.scrollLeft !== scrollLeft) {
+            if (this.schedulerContent.scrollLeft === 0 && onScrollLeft != undefined) {
                 onScrollLeft(schedulerData, this.schedulerContent, this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth);
             }
-            if(this.schedulerContent.scrollLeft === this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth && onScrollRight != undefined) {
+            if (this.schedulerContent.scrollLeft === this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth && onScrollRight != undefined) {
                 onScrollRight(schedulerData, this.schedulerContent, this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth);
             }
-        } else if(this.schedulerContent.scrollTop !== scrollTop) {
-            if(this.schedulerContent.scrollTop === 0 && onScrollTop != undefined) {
+        } else if (this.schedulerContent.scrollTop !== scrollTop) {
+            if (this.schedulerContent.scrollTop === 0 && onScrollTop != undefined) {
                 onScrollTop(schedulerData, this.schedulerContent, this.schedulerContent.scrollHeight - this.schedulerContent.clientHeight);
             }
-            if(this.schedulerContent.scrollTop === this.schedulerContent.scrollHeight - this.schedulerContent.clientHeight && onScrollBottom != undefined) {
+            if (this.schedulerContent.scrollTop === this.schedulerContent.scrollHeight - this.schedulerContent.clientHeight && onScrollBottom != undefined) {
                 onScrollBottom(schedulerData, this.schedulerContent, this.schedulerContent.scrollHeight - this.schedulerContent.clientHeight);
             }
         }
+
         this.setState({
             scrollLeft: this.schedulerContent.scrollLeft,
             scrollTop: this.schedulerContent.scrollTop

@@ -34,7 +34,7 @@ class AgendaResourceEvents extends Component {
                 headerStart = localeMoment(item.start).format(DATE_FORMAT),
                 headerEnd = localeMoment(item.end).format(DATE_FORMAT);
 
-            if(start === headerStart && end === headerEnd) {
+            if (start === headerStart && end === headerEnd) {
                 item.events.forEach((evt) => {
                     let durationStart = localeMoment(startDate);
                     let durationEnd = localeMoment(endDate).add(1, 'days');
@@ -63,7 +63,7 @@ class AgendaResourceEvents extends Component {
                 {a}
             </div>
         );
-        if(!!slotItemTemplateResolver) {
+        if (!!slotItemTemplateResolver) {
             let temp = slotItemTemplateResolver(schedulerData, resourceEvents, slotClickedFunc, width, "overflow-text header2-text");
             if(!!temp)
                 slotItem = temp;

@@ -22,12 +22,12 @@ class Summary extends Component {
         if(summary.color != undefined)
             color = summary.color;
         let textAlign = 'center';
-        if(config.summaryPos === SummaryPos.TopRight || config.summaryPos === SummaryPos.BottomRight)
+        if (config.summaryPos === SummaryPos.TopRight || config.summaryPos === SummaryPos.BottomRight)
             textAlign = 'right';
-        else if(config.summaryPos === SummaryPos.TopLeft || config.summaryPos === SummaryPos.BottomLeft)
+        else if (config.summaryPos === SummaryPos.TopLeft || config.summaryPos === SummaryPos.BottomLeft)
             textAlign = 'left';
         let style = {height: config.eventItemHeight, color: color, textAlign: textAlign, marginLeft: '6px', marginRight: '6px'};
-        if(summary.fontSize != undefined)
+        if (summary.fontSize != undefined)
             style = {...style, fontSize: summary.fontSize};
 
         return (

@@ -14,6 +14,7 @@ const DemoData = {
             id: 'r2',
             name: 'Resource2',
             parentId: 'r3',
+            rowHeight: '22px'
         },
         {
             id: 'r3',

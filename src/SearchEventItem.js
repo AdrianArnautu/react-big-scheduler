@@ -28,7 +28,7 @@ class SearchEventItem extends Component {
         const {config} = schedulerData;
         let roundCls = isStart ? (isEnd ? 'round-all' : 'round-head') : (isEnd ? 'round-tail' : 'round-none');
         let bgColor = config.defaultEventBgColor;
-        if(!!eventItem.bgColor)
+        if (!!eventItem.bgColor)
             bgColor = eventItem.bgColor;
 
         let titleText = schedulerData.behaviors.getEventTextFunc(schedulerData, eventItem);
@@ -48,7 +48,7 @@ class SearchEventItem extends Component {
                 <span style={{marginLeft: '10px', lineHeight: `${config.eventItemHeight}px` }}>{titleText}</span>
             </div>
         );
-        if(eventItemTemplateResolver != undefined)
+        if (eventItemTemplateResolver != undefined)
             eventItemTemplate = eventItemTemplateResolver(schedulerData, eventItem, bgColor, isStart, isEnd, 'event-item', config.eventItemHeight, config.agendaMaxEventWidth);
 
         return ( config.eventItemPopoverEnabled ?

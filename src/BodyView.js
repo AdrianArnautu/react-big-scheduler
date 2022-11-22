@@ -22,15 +22,16 @@ class BodyView extends Component {
             let rowCells = headers.map((header, index) => {
                 let key = item.slotId + '_' + header.time;
                 let style = index === headers.length - 1 ? {} : {width: cellWidth};
-                if(!!header.nonWorkingTime)
+                if (!!header.nonWorkingTime)
                     style = {...style, backgroundColor: config.nonWorkingTimeBodyBgColor};
-                if(item.groupOnly)
+                if (item.groupOnly)
                     style = {...style, backgroundColor: config.groupOnlySlotColor};
-                if(!!behaviors.getNonAgendaViewBodyCellBgColorFunc){
+                if (!!behaviors.getNonAgendaViewBodyCellBgColorFunc){
                     let cellBgColor = behaviors.getNonAgendaViewBodyCellBgColorFunc(schedulerData, item.slotId, header);
-                    if(!!cellBgColor)
+                    if (!!cellBgColor)
                         style = {...style, backgroundColor: cellBgColor};
                 }
+                
                 return (
                     <td className={header.isEndOfHour ? 'hour-boundary' : ''} key={key} style={style}><div></div></td>
                 )

@@ -17,7 +17,6 @@ class ResourceView extends Component {
     }
 
     render() {
-
         const {schedulerData, contentScrollbarHeight, slotClickedFunc, slotItemTemplateResolver, toggleExpandFunc} = this.props;
         const {renderData} = schedulerData;
 
@@ -26,11 +25,11 @@ class ResourceView extends Component {
         let displayRenderData = renderData.filter(o => o.render);
         let resourceList = displayRenderData.map((item) => {
             let indents = [];
-            for(let i=0;i<item.indent;i++) {
+            for (let i = 0; i < item.indent; i++) {
                 indents.push(<span key={`es${i}`} className="expander-space"></span>);
             }
             let indent = <span key={`es${item.indent}`} className="expander-space"></span>;
-            if(item.hasChildren) {
+            if (item.hasChildren) {
                 indent = item.expanded ? (
                     <Icon type="minus-square" key={`es${item.indent}`} style={{}} className=""
                         onClick={() => {
@@ -56,7 +55,7 @@ class ResourceView extends Component {
                     {a}
                 </div>
             );
-            if(!!slotItemTemplateResolver) {
+            if (!!slotItemTemplateResolver) {
                 let temp = slotItemTemplateResolver(schedulerData, item, slotClickedFunc, width, "overflow-text header2-text");
                 if(!!temp)
                     slotItem = temp;
