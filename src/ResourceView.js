@@ -33,7 +33,7 @@ class ResourceView extends Component {
                 indent = item.expanded ? (
                     <Icon type="minus-square" key={`es${item.indent}`} style={{}} className=""
                         onClick={() => {
-                            if(!!toggleExpandFunc)
+                            if (!!toggleExpandFunc)
                                 toggleExpandFunc(schedulerData, item.slotId);
                         }}/>
                 ) : (
@@ -46,9 +46,8 @@ class ResourceView extends Component {
             }
             indents.push(indent);
                     
-            let a = slotClickedFunc != undefined ? <span className="slot-cell">{indents}<a className="slot-text" onClick={() => {
-                slotClickedFunc(schedulerData, item);
-            }}>{item.slotName}</a></span>
+            let a = slotClickedFunc != undefined 
+                ? <span className="slot-cell">{indents}<a className="slot-text" onClick={() => {slotClickedFunc(schedulerData, item);}}>{item.slotName}</a></span>
                 : <span className="slot-cell">{indents}<span className="slot-text">{item.slotName}</span></span>;
             let slotItem = (
                 <div title={item.slotName} className="overflow-text header2-text" style={{textAlign: "left"}}>
@@ -61,8 +60,8 @@ class ResourceView extends Component {
                     slotItem = temp;
             }
 
-            let tdStyle = {height: item.rowHeight};
-            if(item.groupOnly) {
+            let tdStyle = {height: item.customRowHeight !== undefined ? item.customRowHeight : item.rowHeight};
+            if (item.groupOnly) {
                 tdStyle = {
                     ...tdStyle,
                     backgroundColor: schedulerData.config.groupOnlySlotColor

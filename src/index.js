@@ -173,6 +173,7 @@ class Scheduler extends Component {
                 style={{margin: "0px 8px"}}>{item.viewName}</span></RadioButton>
         })
 
+        let tbodyHeaderBottom = "";
         let tbodyContent = <tr />;
         if (showAgenda || viewType === ViewTypes.Search) {
             if (showAgenda) {
@@ -286,13 +287,50 @@ class Scheduler extends Component {
                     </td>
                 </tr>
             );
+
+            if (config.duplicateTableHeaderOnBoottom) {
+                tbodyHeaderBottom = (
+                    <tr>
+                        <td style={{width: resourceTableWidth, verticalAlign: 'top'}}>
+                            <div className="resource-view">
+                                <div style={{overflow: "hidden", borderBottom: "1px solid #e9e9e9", height: config.tableHeaderHeight}}>
+                                    <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
+                                        <table className="resource-table">
+                                            <thead>
+                                            <tr style={{height: config.tableHeaderHeight}}>
+                                                <th className="header3-text">
+                                                    {resourceName}
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="scheduler-view" style={{width: schedulerContainerWidth, verticalAlign: 'top'}}>
+                                <div style={{overflow: "hidden", borderBottom: "1px solid #e9e9e9", height: config.tableHeaderHeight}}>
+                                    <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}} ref={this.schedulerHeadRef} onMouseOver={this.onSchedulerHeadMouseOver} onMouseOut={this.onSchedulerHeadMouseOut} onScroll={this.onSchedulerHeadScroll}>
+                                        <div style={{paddingRight: `${contentScrollbarWidth}px`, width: schedulerWidth + contentScrollbarWidth}}>
+                                            <table className="scheduler-bg-table">
+                                                <HeaderView {...this.props}/>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                );
+            }
         };
 
         let popover = <div className="popover-calendar"><Calendar fullscreen={false} onSelect={this.onSelect} /></div>;
         let schedulerHeader = <div />;
         if (config.headerEnabled) {
             const changeDateHeader = viewType != ViewTypes.Search
-                ? <div className='header2-text'>
+                ? <div className='header2-text calendar-date-switch'>
                     <Icon type="left" style={{marginRight: "8px"}} className="icon-nav" onClick={this.goBack} />
                       {
                           calendarPopoverEnabled
@@ -303,7 +341,7 @@ class Scheduler extends Component {
                       }
                     <Icon type="right" style={{marginLeft: "8px"}} className="icon-nav" onClick={this.goNext}/>
                   </div>
-                : <div className='header2-text'>
+                : <div className='header2-text calendar-date-switch'>
                       <Icon type="left" style={{marginRight: "8px"}} className="icon-nav" onClick={this.goBack} />
                       <Icon type="right" style={{marginLeft: "8px"}} className="icon-nav" onClick={this.goNext} />
                   </div>
@@ -334,6 +372,7 @@ class Scheduler extends Component {
                 </thead>
                 <tbody>
                     {tbodyContent}
+                    {tbodyHeaderBottom}
                 </tbody>
             </table>
         )

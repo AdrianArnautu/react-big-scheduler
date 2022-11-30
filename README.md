@@ -435,6 +435,10 @@ to [this example](https://adrianarnautu.github.io/scheduler/#/freezefirstrow).
 
 Height of Scheduler table header.
 
+#### duplicateTableHeaderOnBoottom
+
+If the Scheduler header should be duplicated at the end of the body, default `false`
+
 #### agendaResourceTableWidth
 
 Width of the left Scheduler resource column in agenda view.

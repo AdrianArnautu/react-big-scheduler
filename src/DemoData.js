@@ -17,6 +17,12 @@ const DemoData = {
             rowHeight: '22px'
         },
         {
+            id: 'r22',
+            name: 'Resource22',
+            parentId: 'r3',
+            rowHeight: '22px'
+        },
+        {
             id: 'r3',
             name: 'Resource3',
             parentId: 'r1',

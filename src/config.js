@@ -59,6 +59,7 @@ export default {
     displayWeekend: true,
     relativeMove: true,
     defaultExpanded: true,
+    duplicateTableHeaderOnBoottom: false,
 
     resourceName: 'Resource Name',
     taskName: 'Task Name',
