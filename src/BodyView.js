@@ -38,7 +38,7 @@ class BodyView extends Component {
             });
 
             return (
-                <tr key={item.slotId} style={{height: item.rowHeight}}>
+                <tr key={item.slotId} style={{height:  item.customRowHeight !== undefined ? item.customRowHeight : item.rowHeight}}>
                     {rowCells}
                 </tr>
             );

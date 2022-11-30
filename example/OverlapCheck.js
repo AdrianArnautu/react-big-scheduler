@@ -26,7 +26,7 @@ class OverlapCheck extends Component{
             <div>
                 <Nav />
                 <div>
-                    <h3 style={{textAlign: 'center'}}>Overlap check<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/OverlapCheck.js" /></h3>
+                    <h3 style={{textAlign: 'center'}}>Overlap check<ViewSrcCode srcCodeUrl="https://github.com/AdrianArnautu/react-resource-scheduler/blob/master/example/OverlapCheck.js" /></h3>
                     <Scheduler schedulerData={viewModel}
                                prevClick={this.prevClick}
                                nextClick={this.nextClick}

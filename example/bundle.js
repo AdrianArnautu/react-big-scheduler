@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import {HashRouter as Router, Route} from 'react-router-dom'
 import Basic from './Basic'
+import HeaderBottom from './HeaderBottom'
 import Readonly from './Readonly'
 import Locale from './Locale'
 import Views from './Views'
@@ -26,6 +27,7 @@ import CustomPopoverStyle from './CustomPopoverStyle'
 render((
     <Router>
         <Route exact path="/" component={Basic}/>
+        <Route path="/headerbottom" component={HeaderBottom}/>
         <Route path="/readonly" component={Readonly}/>
         <Route path="/locale" component={Locale}/>
         <Route path="/views" component={Views}/>

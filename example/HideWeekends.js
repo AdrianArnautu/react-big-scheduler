@@ -30,7 +30,7 @@ class HideWeekends extends Component{
             <div>
                 <Nav />
                 <div>
-                    <h3 style={{textAlign: 'center'}}>Hide weekends<ViewSrcCode srcCodeUrl="https://github.com/StephenChou1017/react-big-scheduler/blob/master/example/HideWeekends.js" /></h3>
+                    <h3 style={{textAlign: 'center'}}>Hide weekends<ViewSrcCode srcCodeUrl="https://github.com/AdrianArnautu/react-resource-scheduler/blob/master/example/HideWeekends.js" /></h3>
                     <Scheduler schedulerData={viewModel}
                                prevClick={this.prevClick}
                                nextClick={this.nextClick}

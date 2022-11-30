@@ -21,12 +21,18 @@ class Nav extends Component {
             <div>
                 <ul style={ulStyle}>
                     <li style={liStyle}>
-                        <span style={{fontWeight: 'bold'}}><a href="https://github.com/StephenChou1017/react-big-scheduler" target="_blank">React Big Scheduler</a></span>
+                        <span style={{fontWeight: 'bold'}}><a href="https://github.com/AdrianArnautu/react-resource-scheduler" target="_blank">React Resource Scheduler</a></span>
                     </li>
                     <li style={liStyle}>
                         <Link target="_self"
                               to='/'>
                             <span>Basic</span>
+                        </Link>
+                    </li>
+                    <li style={liStyle}>
+                        <Link target="_self"
+                              to='/headerbottom'>
+                            <span>Header Bottom</span>
                         </Link>
                     </li>
                     <li style={liStyle}>
