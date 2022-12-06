@@ -312,7 +312,10 @@ class ResourceEvents extends Component {
                 }
 
                 if (headerItem.summary != undefined) {
-                    let top = isTop ? 1 : resourceEvents.rowHeight - config.eventItemLineHeight + 1;
+                    const rowHeight = resourceEvents.customRowHeight !== undefined 
+                        ? parseInt(resourceEvents.customRowHeight.replace('px', ''), 10)
+                        : resourceEvents.rowHeight
+                    let top = isTop ? 1 : rowHeight - config.eventItemLineHeight + 1;
                     let left = index*cellWidth + (index > 0 ? 2 : 3);
                     let width = cellWidth - (index > 0 ? 5 : 6);
                     let key = `${resourceEvents.slotId}_${headerItem.time}`;
@@ -327,7 +330,7 @@ class ResourceEvents extends Component {
                 <td style={{width: rowWidth}}>
                     {
                         connectDropTarget(
-                            <div ref={this.eventContainerRef} className="event-container" style={{height: resourceEvents.rowHeight}}>
+                            <div ref={this.eventContainerRef} className="event-container" style={{height: resourceEvents.customRowHeight !== undefined ? resourceEvents.customRowHeight : resourceEvents.rowHeight}}>
                                 {selectedArea}
                                 {eventList}
                             </div>
